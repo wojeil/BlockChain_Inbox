@@ -10,6 +10,8 @@ const { interface, bytecode } = require('../compile');
 
 let accounts;
 let inbox;
+//will replace everywhere this string is applicable 
+const INITIAL_STRING = 'Helloz'
 
 beforeEach(async () =>{
 // get a list of all accounts
@@ -17,7 +19,7 @@ accounts = await web3.eth.getAccounts();
 
 //Use one of the those accounts to deploy the contract
 inbox = await new web3.eth.Contract(JSON.parse(interface))
- .deploy({ data: bytecode, arguments: ['Helloz']})
+ .deploy({ data: bytecode, arguments: [INITIAL_STRING]})
  .send({from: accounts[0], gas: '1000000'})
 
 });
@@ -28,5 +30,10 @@ describe('Inbox', ()=>{
     //run the test below to confirm a contract exists
     it('deploys a contract', ()=>{
 assert.ok(inbox.options.address);
+    });
+
+    it('has a default message', async ()=>{
+        const message = await inbox.methods.message().call();
+        assert.equal(message, INITIAL_STRING);
     });
 });
