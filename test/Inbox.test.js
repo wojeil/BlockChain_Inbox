@@ -8,3 +8,23 @@ const web3 = new Web3(ganache.provider());
 
 
 
+beforeEach(() =>{
+// get a list of all accounts
+web3.eth.getAccounts()
+.then(fetchedAccounts => {
+    console.log(fetchedAccounts);
+});
+
+
+//Use one of the those accounts to deploy the contract
+
+
+});
+
+
+//testing out the fetch account works 
+describe('Inbox', ()=>{
+    it('deploys a contract', ()=>{
+
+    });
+});
