@@ -31,9 +31,16 @@ describe('Inbox', ()=>{
     it('deploys a contract', ()=>{
 assert.ok(inbox.options.address);
     });
-
+// run this test async to confirm there is an initial message 
     it('has a default message', async ()=>{
         const message = await inbox.methods.message().call();
         assert.equal(message, INITIAL_STRING);
+    });
+    //run this test below to confirm we can update via set message
+    it('can set message', async ()=>{
+        await inbox.methods.setMessage('bye').send({from: accounts[0]});
+        const message = await inbox.methods.message().call();
+        assert.equal(message, 'bye');
+        
     });
 });
