@@ -25,6 +25,7 @@ inbox = await new web3.eth.Contract(JSON.parse(interface))
 
 //testing out the fetch account works 
 describe('Inbox', ()=>{
+    //run the test below to confirm a contract exists
     it('deploys a contract', ()=>{
 assert.ok(inbox.options.address);
     });
